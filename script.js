@@ -2,7 +2,8 @@
 var city ="";
 //giving variable for html element
 //set up the API key
-var key = "31c479aa4f3f64f2fad8f58a010a4b7e";
+var key = "d81037013b1c0407cea56645f559ee00";
+
 //get a ajax call for the current city stat
 function currentWeather(city){
     //get the data from API
@@ -13,5 +14,9 @@ function currentWeather(city){
     }).then(function(response){
         //log to check the city
         console.log(response);
+        //create the weather Icon
+        var weatherIcon = response.weather[0].icon
+        console.log(weatherIcon);
     })
 }
+currentWeather(city);
