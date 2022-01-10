@@ -55,6 +55,13 @@ function currentWeather(city){
                 localStorage.setItem("city Name",JSON.stringify(cityEl));
                 list(city);
             }
+            else {
+                if(find(city)>0){
+                    cityEl.push(city);
+                    localStorage.setItem("city Name",JSON.stringify(cityEl));
+                    list(city);
+                }
+            }
         }
     })
 }
@@ -113,4 +120,13 @@ function list(e){
     var list = $("<li>"+e+"</li>");
     $(list).attr("class", "list-group-item");
     $("#list").append(list);
+}
+
+// need a function to indicate if there is city in the localStorage
+function find(c){
+    //give a for loop condition to loop for city
+    for (var i = 0; i < array.length; i++) {
+        
+        
+    }
 }
