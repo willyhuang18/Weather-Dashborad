@@ -30,6 +30,13 @@ function currentWeather(city){
         //this will representation of the date portion of the specified date in the user agent's timezone.
         var timeZone = new Date(response.dt*1000).toLocaleDateString();//dt is the data from weather API
         console.log(timeZone);
-
+        //display everything above into the current city section
+        $("#current").html("Current city: " + response.name + "(" + timeZone+  ")" + "<img src="+ weatherIconUrl +">")
+        //display the temp for the city
+        $("#temperature").html(response.main.temp +" &#8457");
+        //display the humidity
+        $("#humidity").html(response.main.humidity + "%");
+        //need to convert the wind speed to MPH, format from wind speed converter
+        $("#wind").html((response.wind.speed * 2.237).toFixed(1) + "MPH");
     })
 }
