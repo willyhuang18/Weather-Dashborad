@@ -135,8 +135,10 @@ function find(c){
 }
 
 //clear function to delete previous location
-$("#clear").on("click", function clear(e){
+$("#clear-button").on("click", function clear(e){
     e.preventDefault();
     localStorage.removeItem("city Name");
     location.reload();
 });
+
+
