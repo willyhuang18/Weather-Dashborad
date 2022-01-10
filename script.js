@@ -41,7 +41,7 @@ function currentWeather(city){
         $("#wind").html((response.wind.speed * 2.237).toFixed(1) + "MPH");
         //execute the UV function
         UV(response.coord.lat,response.coord.lon);
-
+        forecast(response.id);
     })
 }
 
@@ -54,41 +54,42 @@ function UV(lat,lon){//lat:latitude ;lon:longitude;
     }).then(function(response){
         $("#UV").html(response.value);
     })
-    //try to calc the data in the for loop 
-    function forecast(hourly){
-        var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude="+hourly+"&appid="+key;
-        $.ajax({
-            url: forecastUrl,
-            method: "GET"
-        }).then(function(response){
-            console.log(response);
-        })
-    }
-    forecast();
 }
 
 //declare function that 5 days forecast 
-// function forecast(id){
-//     var forecastUrl = "api.openweathermap.org/data/2.5/forecast?q="+ id + "&appid=" + key;
-//     $.ajax({
-//         url:forecastUrl,
-//         method: "GET"
-//     }).then(function(response){
-//         //give a for loop for next five day
+function forecast(cityid){
+    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?id="+cityid+"&appid="+key;
+    $.ajax({
+        url:forecastUrl,
+        method: "GET"
+    }).then(function(response){
+        //give a for loop for next five day
 
-//         for (var i = 0; i <5 ; i++) {
-//            //date variable
-//            //icon variable
-//            //temp variable
-//            //humidity variable
-//            //contain them into one variable
-//            var forecast = `<div class="bg-primary text-light m-3 p-2 rounded">
-//            <p ${date[i]}></p>
-//            <p ${icon[i]}></p>
-//            <p>Temp: <span ${temp}></span></p>
-//            <p>Humidity: <span ${humi}></span></p>
-//        </div>`           
-//        $("#forecast").append(forecast);  
-//         }
-//     })
-// }
+        for (var i = 0; i <5 ; i++) {
+           //date variable
+           var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+           console.log(date);
+           //icon variable
+           var icon= response.list[((i+1)*8)-1].weather[0].icon;
+           var iconurl="https://openweathermap.org/img/wn/"+ icon +"@2x.png";
+           console.log(iconurl);
+           //temp variable
+           var tempK= response.list[((i+1)*8)-1].main.temp;
+           var temp=(((tempK-273.5)*1.80)+32).toFixed(2);
+           console.log(temp);
+           //humidity variable
+           var humi= response.list[((i+1)*8)-1].main.humidity;
+           console.log(humi);
+           //contain them into one variable
+           var forecast = `
+        <div class="col-sm-2 bg-primary text-white m-2 p-2 rounded">
+            <div>${date}</div>
+            <div>${iconurl}</div>
+            <div>Temp: ${temp}&#8457</div>
+            <div>Humidity: ${humi}%</div>
+        </div>
+       `           
+       $("#forecast").append(forecast);  
+        }
+    })
+}
