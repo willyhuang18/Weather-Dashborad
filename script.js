@@ -42,6 +42,7 @@ function currentWeather(city){
         //execute the UV function
         UV(response.coord.lat,response.coord.lon);
         forecast(response.id);
+        list(city);
     })
 }
 
@@ -91,5 +92,12 @@ function forecast(cityid){
        `           
        $("#forecast").append(forecast);  
         }
-    })
+    })              
+}
+
+//adding list function
+function list(e){
+    var list = $("<li>"+e+"</li>");
+    $(list).attr("class", "list-group-item");
+    $("#list").append(list);
 }
