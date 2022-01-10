@@ -56,6 +56,7 @@ function currentWeather(city){
                 list(city);
             }
             else {
+                //if find any, it will put that into the list
                 if(find(city)>0){
                     cityEl.push(city);
                     localStorage.setItem("city Name",JSON.stringify(cityEl));
@@ -125,8 +126,10 @@ function list(e){
 // need a function to indicate if there is city in the localStorage
 function find(c){
     //give a for loop condition to loop for city
-    for (var i = 0; i < array.length; i++) {
-        
-        
+    for (var i=0; i<cityEl.length; i++){
+        //give condition to check there is city in the array variable
+        if(c ===cityEl[i]){
+            return c;
+        }
     }
 }
