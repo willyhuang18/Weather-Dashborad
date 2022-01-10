@@ -54,29 +54,41 @@ function UV(lat,lon){//lat:latitude ;lon:longitude;
     }).then(function(response){
         $("#UV").html(response.value);
     })
+    //try to calc the data in the for loop 
+    function forecast(hourly){
+        var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude="+hourly+"&appid="+key;
+        $.ajax({
+            url: forecastUrl,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+        })
+    }
+    forecast();
 }
 
 //declare function that 5 days forecast 
-function forecast(id){
-    var forecastUrl = "api.openweathermap.org/data/2.5/forecast?q="+ id + "&appid=" + key;
-    $.ajax({
-        url:forecastUrl,
-        method: "GET"
-    }).then(function(response){
-        //give a for loop for next five day
-        for (var i = 0; i <5 ; i++) {
-           //date variable
-           //icon variable
-           //temp variable
-           //humidity variable
-           //contain them into one variable
-           var forecast = `<div class="bg-primary text-light m-3 p-2 rounded">
-           <p ${date[i]}></p>
-           <p ${icon[i]}></p>
-           <p>Temp: <span ${temp}></span></p>
-           <p>Humidity: <span ${humi}></span></p>
-       </div>`           
-       $("#forecast").append(forecast);  
-        }
-    })
-}
+// function forecast(id){
+//     var forecastUrl = "api.openweathermap.org/data/2.5/forecast?q="+ id + "&appid=" + key;
+//     $.ajax({
+//         url:forecastUrl,
+//         method: "GET"
+//     }).then(function(response){
+//         //give a for loop for next five day
+
+//         for (var i = 0; i <5 ; i++) {
+//            //date variable
+//            //icon variable
+//            //temp variable
+//            //humidity variable
+//            //contain them into one variable
+//            var forecast = `<div class="bg-primary text-light m-3 p-2 rounded">
+//            <p ${date[i]}></p>
+//            <p ${icon[i]}></p>
+//            <p>Temp: <span ${temp}></span></p>
+//            <p>Humidity: <span ${humi}></span></p>
+//        </div>`           
+//        $("#forecast").append(forecast);  
+//         }
+//     })
+// }
