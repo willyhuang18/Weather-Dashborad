@@ -141,4 +141,10 @@ $("#clear-button").on("click", function clear(e){
     location.reload();
 });
 
-
+//need a different function to indicate last data
+function getLastCity(){
+    if($("#list") === null){
+        localStorage.getItem("city Name");
+    }
+}
+getLastCity();
