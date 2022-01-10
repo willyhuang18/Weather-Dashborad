@@ -1,5 +1,5 @@
 //giving an empty variable to store city
-var city ="London";
+var city ="";
 //giving variable for html element
 //set up the API key
 var key = "31c479aa4f3f64f2fad8f58a010a4b7e";
@@ -9,7 +9,6 @@ function display(event){
     if($("#input").val().trim() !==""){
         city = $("#input").val().trim();
         currentWeather(city);
-        
     }
 }
 $("#search-button").on("click",display)
@@ -42,7 +41,7 @@ function currentWeather(city){
         $("#wind").html((response.wind.speed * 2.237).toFixed(1) + "MPH");
         //execute the UV function
         UV(response.coord.lat,response.coord.lon);
-        
+
     })
 }
 
@@ -56,6 +55,7 @@ function UV(lat,lon){//lat:latitude ;lon:longitude;
         $("#UV").html(response.value);
     })
 }
+
 //declare function that 5 days forecast 
 function forecast(id){
     var forecastUrl = "api.openweathermap.org/data/2.5/forecast?q="+ id + "&appid=" + key;
@@ -64,6 +64,19 @@ function forecast(id){
         method: "GET"
     }).then(function(response){
         //give a for loop for next five day
+        for (var i = 0; i <5 ; i++) {
+           //date variable
+           //icon variable
+           //temp variable
+           //humidity variable
+           //contain them into one variable
+           var forecast = `<div class="bg-primary text-light m-3 p-2 rounded">
+           <p ${date[i]}></p>
+           <p ${icon[i]}></p>
+           <p>Temp: <span ${temp}></span></p>
+           <p>Humidity: <span ${humi}></span></p>
+       </div>`           
+       $("#forecast").append(forecast);  
+        }
     })
-
 }
