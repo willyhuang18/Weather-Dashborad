@@ -26,17 +26,32 @@ function currentWeather(city){
         // this will hold the icon
         var weatherIcon = response.weather[0].icon
         //source from open weather map icon
-        var weatherIconUrl ="https://openweathermap.org/img/wn/"+weatherIcon +"@2x.png";
+        var weatherIconUrl ="https://openweathermap.org/img/wn/"+ weatherIcon +"@2x.png";
         //this will representation of the date portion of the specified date in the user agent's timezone.
         var timeZone = new Date(response.dt*1000).toLocaleDateString();//dt is the data from weather API
         console.log(timeZone);
         //display everything above into the current city section
         $("#current").html("Current city: " + response.name + "(" + timeZone+  ")" + "<img src="+ weatherIconUrl +">")
         //display the temp for the city
-        $("#temperature").html(response.main.temp +" &#8457");
+        //need to convert Kelvin to Fahrenheit, formula from w3school
+        $("#temperature").html(((response.main.temp - 273.15) * 1.80 + 32 ).toFixed(2) +" &#8457");
         //display the humidity
         $("#humidity").html(response.main.humidity + "%");
-        //need to convert the wind speed to MPH, format from wind speed converter
+        //need to convert the wind speed to MPH, formula from wind speed converter
         $("#wind").html((response.wind.speed * 2.237).toFixed(1) + "MPH");
+        //execute the UV function
+        UV(response.coord.lat,response.coord.lon);
+
+    })
+}
+
+//need different ajax function to get the UV index
+function UV(lat,lon){//lat:latitude ;lon:longitude; 
+    var UVurl = "https://api.openweathermap.org/data/2.5/uvi?appid="+ key+"&lat="+lat+"&lon="+lon;
+    $.ajax({
+        url:UVurl,
+        method: "GET"
+    }).then(function(response){
+        $("#UV").html(response.value);
     })
 }
