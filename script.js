@@ -43,7 +43,7 @@ function currentWeather(city){
         //execute the UV function
         UV(response.coord.lat,response.coord.lon);
         forecast(response.id);
-        //successful request with HTTP Response Code 200,
+        //successful request with HTTP status 200,
         if(response.cod==200){
             cityEl=JSON.parse(localStorage.getItem("city Name"));
             console.log(cityEl);
@@ -133,3 +133,10 @@ function find(c){
         }
     }
 }
+
+//clear function to delete previous location
+$("#clear").on("click", function clear(e){
+    e.preventDefault();
+    localStorage.removeItem("city Name");
+    location.reload();
+});
