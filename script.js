@@ -1,6 +1,7 @@
 //giving an empty variable to store city
 var city ="";
 //giving variable for html element
+var cityEl = [];
 //set up the API key
 var key = "31c479aa4f3f64f2fad8f58a010a4b7e";
 //declare function for searching input to display
@@ -42,7 +43,19 @@ function currentWeather(city){
         //execute the UV function
         UV(response.coord.lat,response.coord.lon);
         forecast(response.id);
-        list(city);
+        //successful request with HTTP Response Code 200,
+        if(response.cod==200){
+            cityEl=JSON.parse(localStorage.getItem("city Name"));
+            console.log(cityEl);
+            if (cityEl==null){
+                //empty the variable
+                cityEl=[];
+                //in order to push something inside localStorage
+                cityEl.push(city);
+                localStorage.setItem("city Name",JSON.stringify(cityEl));
+                list(city);
+            }
+        }
     })
 }
 
