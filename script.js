@@ -4,7 +4,6 @@ var city ="";
 var cityEl = [];
 //set up the API key
 var key = "31c479aa4f3f64f2fad8f58a010a4b7e";
-getLastCity();
 //declare function for searching input to display
 function display(event){
     event.preventDefault();
@@ -130,9 +129,10 @@ function find(c){
     for (var i=0; i<cityEl.length; i++){
         //give condition to check there is city in the array variable
         if(c ===cityEl[i]){
-            return c;
+            return -1;
         }
     }
+    return 1;
 }
 
 //clear function to delete previous location
@@ -160,3 +160,14 @@ function getLastCity(){
         currentWeather(city)
     }
 }
+
+$("li").on("click", function (e){
+    var listEl = e.target;
+    if(e.target.matches("li")){
+        city = listEl.textContent.trim();
+        currentWeather(city);
+    }
+})
+
+$(window).on("load",getLastCity);
+
