@@ -4,6 +4,7 @@ var city ="";
 var cityEl = [];
 //set up the API key
 var key = "31c479aa4f3f64f2fad8f58a010a4b7e";
+getLastCity();
 //declare function for searching input to display
 function display(event){
     event.preventDefault();
@@ -106,7 +107,7 @@ function forecast(cityid){
            var forecast = `
         <div class="col-sm-2 bg-primary text-white m-2 p-2 rounded">
             <div>${date}</div>
-            <div>${iconurl}</div>
+            <div><img src= "${iconurl}"></div>
             <div>Temp: ${temp}&#8457</div>
             <div>Humidity: ${humi}%</div>
         </div>
@@ -143,8 +144,19 @@ $("#clear-button").on("click", function clear(e){
 
 //need a different function to indicate last data
 function getLastCity(){
-    if($("#list") === null){
-        localStorage.getItem("city Name");
+    //empty the list 
+    $("ul").empty();
+    //get the data from local storage
+    var cityEl =JSON.parse(localStorage.getItem("city Name"));
+    //declare condition make sure the storage got something
+    if(cityEl !== null){
+        cityEl =JSON.parse(localStorage.getItem("city Name"));
+        //list every city in the storage
+        for (var i = 0; i < cityEl.length; i++) {
+            list(cityEl[i])            
+        }
+        //display the last city in the storage
+        city = cityEl[i-1]
+        currentWeather(city)
     }
 }
-getLastCity();
