@@ -86,7 +86,7 @@ function forecast(cityid){
         method: "GET"
     }).then(function(response){
         //give a for loop for next five day
-
+        $("#forecast").html("");
         for (var i = 0; i <5 ; i++) {
            //date variable
            var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
