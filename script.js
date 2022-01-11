@@ -162,7 +162,9 @@ function getLastCity(){
 }
 
 function past(e){
+    //declare a variable for the event target
     var listEl = e.target;
+    //if the target click the item, it will execute the current weather function
     if(e.target.matches("li")){
         city = listEl.textContent.trim();
         currentWeather(city);
