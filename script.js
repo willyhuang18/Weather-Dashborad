@@ -161,13 +161,13 @@ function getLastCity(){
     }
 }
 
-$("li").on("click", function (e){
+function past(e){
     var listEl = e.target;
     if(e.target.matches("li")){
         city = listEl.textContent.trim();
         currentWeather(city);
     }
-})
+}
 
 $(window).on("load",getLastCity);
-
+$(document).on("click", past)
