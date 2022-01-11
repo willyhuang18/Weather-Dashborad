@@ -1,5 +1,5 @@
 # Weather-Dashborad 
-Work independent to create Quiz website from blank:
+Work independent to create weather dashboard website from blank:
 
 - As a Developer, I want to use the knowledge I learned to generate weather dashboard by using JavaScript, JQuery, HTML, and CSS.
 
@@ -29,6 +29,7 @@ This application contains the information about I had learn, and the work I have
 
 
 # Deployed Link
+https://willyhuang18.github.io/Weather-Dashborad/
 
 # Authors
 PangTa Huang
